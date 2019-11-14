@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body {
+            margin-top: 2.5%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .card {
+            margin: 10px !important;
+        }
+
+        .row {
+            padding-left: 15%;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <h1 align="center">Aaron Smith</h1>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Keywords (fever, fidget, sad...)">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Analyze</button>
+        </div>
+    </div>
+    <div id="cardstack" class="card-columns">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        var testJSON = [{ message: "Aaron fidgeted sjdifjoiddjoijofiejorjoeiroewjroti today", name: "Stacy", role: "yawn", time: "10/2" }, { message: "Aaron wojeoiwqrjtuerhjtiuerutgeuirgfidgeted today", name: "Stacy", role: "Daycare", time: "10/2" }, { message: "Aaron fidgeted today", name: "Stacy", role: "Daycare", time: "10/2" }, { message: "Aaron didn't fidget today", name: "Barbara", role: "Mom", time: "9/30" }, { message: "Aaron laughed today", name: "Mrs. Clark", role: "Teacher", time: "9/29" }];
+        sort(testJSON);
+        function sort(data) {
+            var i = 0;
+            var stack = document.getElementById('cardstack');
+            stack.innerHTML = "";
+            for (i = 0; i < data.length; i++) {
+                var ca = document.createElement('div');
+                ca.setAttribute('class', 'card');
+                ca.setAttribute('id', 'card' + i);
+                stack.appendChild(ca);
+
+                var cb = document.createElement('div');
+                switch (data[i].role) {
+                    case ('Teacher'):
+                        ca.setAttribute('class', 'card border-warning mb-3');
+                        break;
+                    case ('Daycare'):
+                        ca.setAttribute('class', 'card border-success mb-3');
+                        break;
+                    case ('Mom' || 'Dad' || 'Parent'):
+                        ca.setAttribute('class', 'card border-primary mb-3');
+                        break;
+                    default:
+                        ca.setAttribute('class', 'card border-dark mb-3');
+                        break;
+                }
+                cb.setAttribute('class', 'card-body');
+                cb.setAttribute('id', 'card-body' + i);
+                ca.appendChild(cb);
+
+                var mess = document.createElement('p');
+                mess.setAttribute('class', 'card-text');
+                mess.setAttribute('id', 'mess' + i);
+                mess.appendChild(document.createTextNode(data[i].message));
+                cb.appendChild(mess);
+
+                var note = document.createElement('p');
+                note.setAttribute('class', 'card-text');
+                note.setAttribute('id', 'tiny' + i);
+                cb.appendChild(note);
+
+                var smol = document.createElement('small');
+                smol.setAttribute('class', 'text-muted');
+                smol.appendChild(document.createTextNode(data[i].name + " (" + data[i].role + "), " + data[i].time));
+                note.appendChild(smol);
+
+            }
+        }
+    </script>
+</body>
+</html>

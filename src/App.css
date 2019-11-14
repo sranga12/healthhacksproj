@@ -1,0 +1,16 @@
+h1 {
+    padding-top: 2.5%;
+}
+
+.CardStack {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.card {
+    margin: 10px !important;
+}
+
+.row {
+    padding-left: 15%;
+}
